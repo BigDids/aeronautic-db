@@ -4,12 +4,12 @@ from .models import *
 
 
 class ApronsInline(admin.StackedInline):
-    model = Aprons
+    model = Apron
     extra = 1
 
 
 class ADAdmin(admin.ModelAdmin):
-    fields = ["nom", "code_oaci", "frequence_radio_mhz"]
+    fields = ["name", "icao_code", "frequency_mhz"]
     inlines = [ApronsInline]
 
 
