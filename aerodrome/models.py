@@ -70,10 +70,15 @@ class Apron(models.Model):
 
     ad = models.ForeignKey(AD, on_delete=models.CASCADE, related_name='aprons')
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='aprons')
-    apron_type = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
+    apron_type = models.CharField(
+        max_length=100,
+        choices=APRON_CHOICES.items(),
+        default=GENERAL_AVIATION,
+    )
 
     def __str__(self):
-        return f"{self.apron_type} - {self.building} - {self.ad.icao_code}"
+        return f"{self.name} - {self.ad.icao_code}"
 
 
 class Fuel(models.Model):
@@ -95,7 +100,8 @@ class Fuel(models.Model):
     )
 
     def __str__(self):
-        return f"{self.fuel_type} - {self.ad.icao_code}"
+        label = self.FUEL_TYPE_CHOICES.get(self.fuel_type)
+        return f"{label} - {self.ad.icao_code}"
 
 
 class Service(models.Model):
@@ -112,6 +118,7 @@ class Service(models.Model):
     }
 
     ad = models.ForeignKey(AD, on_delete=models.CASCADE, related_name='services')
+    name = models.CharField(max_length=50)
     service_type = models.CharField(
         max_length=50,
         choices=SERVICE_CHOICES.items(),
@@ -119,4 +126,4 @@ class Service(models.Model):
     )
 
     def __str__(self):
-        return f"{self.service_type} - {self.ad.icao_code}"
+        return f"{self.name} - {self.ad.icao_code}"

@@ -27,7 +27,7 @@ class BuildingAdmin(admin.ModelAdmin):
 
 @admin.register(Apron)
 class ApronAdmin(admin.ModelAdmin):
-    list_display = ["apron_type", "building", "ad"]
+    list_display = ["name", "apron_type", "building", "ad"]
 
 
 @admin.register(Fuel)
@@ -37,4 +37,4 @@ class FuelAdmin(admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ["service_type", "ad"]
+    list_display = ["name", "service_type", "ad"]
